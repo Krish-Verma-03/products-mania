@@ -15,12 +15,12 @@ function Nav() {
 
   return (
     <nav className="w-[15%] h-full flex flex-col items-center pt-5 bg-slate-100  ">
-    <a
+    <Link 
       className="transition-all hover:bg-slate-100 border border-purple-300 bg-white rounded py-2 px-5 text-purple-400 "
-      href="/create"
+      to={`/create`}
     >
       Add New Product
-    </a>
+    </Link>
     <hr className=" my-3 w-[80%]" />
     <h1 className="text-2xl text-slate-600 mb-3 w-[80%]">Categories</h1>
     <div className="w-[80%]">
