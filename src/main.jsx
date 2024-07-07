@@ -10,7 +10,7 @@ import'react-toastify/dist/ReactToastify.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Context>
-  <BrowserRouter>
+  <BrowserRouter basename="/products-mania/">
     <App />
     <ToastContainer />
   </BrowserRouter>
