@@ -3,7 +3,11 @@ import axios from "./Axios";
 
 export const ProductContext = createContext();
 const Context = (props)=>{
-    const [products , setproducts]=useState(null);
+    const isData = JSON.parse(localStorage.getItem('products'));
+    console.log(isData);
+    const [products , setproducts]=useState(
+        JSON.parse(localStorage.getItem('products')) || null
+    );
 
     const getproducts = async ()=>{
         try{
@@ -16,6 +20,7 @@ const Context = (props)=>{
     }
 
     useEffect(()=>{
+        if(!isData)
         getproducts()
     },[]);
 

@@ -1,13 +1,51 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
+import { ProductContext } from '../utils/Context';
+import { nanoid } from 'nanoid';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 function Create() {
+    const [products,setproducts] = useContext(ProductContext);
     const [title,settitle]=useState("");
     const [image,setimage]=useState("");
     const [category,setcategory]=useState("");
     const [price,setprice]=useState("");
     const [description,setdescription]=useState("");
+
+    const navigate = useNavigate();
+
+  const addProductHandler = (e)=>{
+    e.preventDefault();
+
+    if(
+      title.trim().length <5 ||
+      image.trim().length <5 ||
+      category.trim().length <5 ||
+      price.trim().length <1 ||
+      description.trim().length <5 
+    ){
+      alert('Please fill all fields with minimum 5 characters');
+      return;
+    }
+    const product ={
+      id: nanoid(),
+      title,
+      image,
+      category,
+      price,
+      description
+    };
+    
+    setproducts([...products,product]);
+    localStorage.setItem('products', JSON.stringify([...products,product]));
+    toast.success("Product Added Successfully");
+    navigate('/');
+  }
+
   return (
-    <form className="flex flex-col items-center p-[5%] w-screen h-screen" >
+    <form 
+    onSubmit={addProductHandler}
+    className="flex flex-col items-center p-[5%] w-screen h-screen" >
         <h1 className='mb-5 w-1/2 text-3xl '>Add New Product</h1>
         <input
          type="url" 
@@ -49,7 +87,7 @@ function Create() {
         
         ></textarea>
         <div className='w-1/2'>
-        <button onClick={addProductHandler} className='transition-all hover:bg-slate-100 border border-purple-300 bg-white rounded py-2 px-5 text-purple-400'>Add New Product</button></div>
+        <button type='submit'  className='transition-all hover:bg-slate-100 border border-purple-300 bg-white rounded py-2 px-5 text-purple-400'>Add New Product</button></div>
     </form>
   )
 }

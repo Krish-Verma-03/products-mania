@@ -9,18 +9,24 @@ function Home() {
   const [products , setproducts]=useContext(ProductContext);
   const {search}=useLocation();
   const category = decodeURIComponent(search.split('=')[1]);
+  console.log(products);
   
   
 
   const [filteredProducts,setfilteredProducts]=useState(products);
-  const getfilteredProducts=async ()=>{
-    try{
-      const {data}=await axios.get(`/products/category/${category}`);
-      setfilteredProducts(data);
-    } catch(error){
-      console.error(error);
-    }
+
+  const getfilteredProducts=()=>{
+    const showProduct = products.filter((p,i)=>{
+           
+      return(
+      
+      p.category===category
+    )
+  });
+  setfilteredProducts(showProduct);
   }
+
+  
 
   useEffect(()=>{
     if(!filteredProducts || category =="undefined")
@@ -30,6 +36,7 @@ function Home() {
     } 
   }
   ,[category,products]);
+
   
   return products? (
     <>

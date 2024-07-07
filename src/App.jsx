@@ -2,6 +2,7 @@ import React from "react";
 import { Routes , Route, useLocation } from "react-router-dom";
 import Home from "./Components/Home";
 import Create from "./Components/Create";
+import Edit from "./Components/Edit";
 import Details from "./Components/Details";
 import { Link } from "react-router-dom";
 import { IoHome } from "react-icons/io5";
@@ -25,6 +26,7 @@ function App() {
      <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/create" element={<Create />} />
+        <Route path="/edit/:id" element={<Edit />} />
         <Route path="/details/:id" element={<Details />} />
      </Routes>
 
